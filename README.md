@@ -1,6 +1,6 @@
 # Photius Docker
 
-Photius Docker is unpretentious workhorse that can help organize and optimize your personal photo and video home archive on a daily basis.
+Photius Docker is unpretentious workhorse that maintains fitness of your personal photo and video home archive.
 
 ## What it does?
 
