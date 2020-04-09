@@ -43,6 +43,12 @@ chown $user:$group "$TEMP_DIR"
 chown $user:$group "$DEST_DIR"
 
 ##
+# Timezone
+##
+
+echo "Current timezone: $TZ"
+
+##
 # Start Main Loop
 ##
 
