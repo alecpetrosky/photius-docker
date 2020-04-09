@@ -14,7 +14,7 @@ Here're list of actions that Photius currently performs on media files:
 - Set EXIF DateTimeOriginal from filename and file attributes (if DateTimeOriginal is absent).
 - Sanitize EXIF.
 - Convert file extension to lower-case.
-- Make filename of photoboost photo (which were taken with Google Camera) to look better.
+- Make filename of photoboost photo (which were taken with Google Camera) look better.
 
 ## Usage
 
