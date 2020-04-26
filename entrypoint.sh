@@ -13,7 +13,7 @@ DEST_DIR=/opt/dest
 export SRC_DIR TEMP_DIR DEST_DIR
 
 ##
-# Version
+# Display Version
 ##
 
 version=$(cat VERSION)
