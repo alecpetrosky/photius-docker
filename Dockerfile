@@ -14,6 +14,7 @@ ENV PUID=1000 PGID=1000 TZ=Etc/UTC
 
 COPY *.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
+ADD VERSION .
 
 HEALTHCHECK CMD /usr/local/bin/healthcheck.sh || exit 1
 CMD /usr/local/bin/entrypoint.sh
