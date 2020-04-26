@@ -1,7 +1,10 @@
 FROM debian:stable-slim
 LABEL maintainer="docker@llamaq.com"
 
-RUN apt-get update && apt-get install -y bc gosu libimage-exiftool-perl ffmpeg imagemagick jpegoptim optipng
+RUN apt-get update \
+  && apt-get install --no-install-recommends --no-install-suggests -y \
+    gosu bc libimage-exiftool-perl ffmpeg imagemagick jpegoptim optipng \
+  && apt-get -y clean && apt-get purge -y --auto-remove && rm -rf /var/lib/apt/lists/*
 
 VOLUME /opt/src
 VOLUME /opt/temp
