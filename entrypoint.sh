@@ -13,6 +13,13 @@ DEST_DIR=/opt/dest
 export SRC_DIR TEMP_DIR DEST_DIR
 
 ##
+# Version
+##
+
+version=$(cat VERSION)
+echo "Version: $version"
+
+##
 # Define user and group credentials used by worker processes
 ##
 
