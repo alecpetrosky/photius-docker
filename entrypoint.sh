@@ -45,7 +45,7 @@ echo "Credentials used by worker processes: user $user($PUID), group $group($PGI
 # Setting Up Directories
 ##
 
-test -f /tmp/healthcheck && chown $user:$group /tmp/healthcheck
+test -f /tmp/healthcheck && rm /tmp/healthcheck
 chown $user:$group "$SRC_DIR"
 chown $user:$group "$TEMP_DIR"
 chown $user:$group "$DEST_DIR"
