@@ -8,12 +8,12 @@ Photius constantly monitors an input directory `/opt/src` for media files (image
 
 Here're list of actions that Photius currently performs on media files:
 
-- JPEG quality optimization.
+- JPEG quality optimization with `jpegoptim`.
 - Automatic (using exif orientation tag) lossless rotation with `exiftran`.
-- PNG to JPEG convertion.
-- Video convertion to mp4 with libx265 (HEVC) codec.
-- Setting EXIF DateTimeOriginal from filename and file attributes (if DateTimeOriginal is absent).
-- EXIF sanitizing.
+- PNG to JPEG convertion with `ImageMagick`.
+- MP4 video convertion with `ffmpeg` (libx265 hvc1).
+- Setting EXIF DateTimeOriginal from filename and file attributes (if DateTimeOriginal is absent) with `exiftool`.
+- EXIF sanitizing with `exiftool`.
 - Lower-case file extension convertion.
 - Making filename of photoboost photo (which were taken with Google Camera) look better.
 
