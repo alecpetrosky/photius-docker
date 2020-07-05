@@ -10,12 +10,13 @@ Here're list of actions that Photius currently performs on media files:
 
 - JPEG quality optimization with `jpegoptim`.
 - Automatic (using exif orientation tag) lossless rotation with `exiftran`.
-- PNG to JPEG convertion with `ImageMagick`.
+- PNG files optimization with OptiPNG that reduces their size to a minimum, without losing semantic information. In addition, this program shall perform error recovery. This option has no effect on valid input files. The  program will spend a reasonable amount of effort to recover as much data as possible.
 - MP4 video convertion with `ffmpeg` (libx265 hvc1).
 - Setting EXIF DateTimeOriginal from filename and file attributes (if DateTimeOriginal is absent) with `exiftool`.
 - EXIF sanitizing with `exiftool`.
 - Lower-case file extension convertion.
 - Making filename of photoboost photo (which were taken with Google Camera) look better.
+- Setting original file's md5sum as “Image Unique ID” EXIF field that could be used in photo management software.
 
 ## Usage
 
