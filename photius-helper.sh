@@ -64,6 +64,10 @@ if [ $exit_code -eq 0 ]; then
   if [[ -z $(exiftool -p '$dateTimeOriginal' -q "$dest") ]]; then
     exiftool -overwrite_original "-alldates<filename" "$dest"
   fi
+  if [[ -z $(exiftool -p '$gpstimestamp' -q "$dest") || -z $(exiftool -p '$gpsdatestamp' -q "$dest") ]]; then
+    tz=$(date +%:z)
+    exiftool -overwrite_original '-gpstimestamp<${datetimeoriginal}'"$tz" '-gpsdatestamp<${datetimeoriginal}'"$tz" "$dest"
+  fi
   if [[ -z "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
     exiftool -v -d "$DEST_DIR/%Y/%m/%d/%%f%%-c.%%le" '-FileName<DateTimeOriginal' "$dest"
   else
