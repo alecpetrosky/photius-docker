@@ -12,8 +12,10 @@ VOLUME /opt/dest
 
 ENV PUID=1000 PGID=1000 TZ=Etc/UTC
 
-COPY *.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/*.sh
+COPY photius.sh /photius.sh
+COPY photius-helper.sh /photius-helper.sh
+COPY healthcheck.sh /healthcheck.sh
+COPY entrypoint.sh /entrypoint.sh
 
-HEALTHCHECK CMD /usr/local/bin/healthcheck.sh || exit 1
-CMD /usr/local/bin/entrypoint.sh
+HEALTHCHECK CMD /healthcheck.sh || exit 1
+CMD /entrypoint.sh

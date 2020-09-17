@@ -19,7 +19,7 @@ export SRC_DIR TEMP_DIR DEST_DIR
 group=$(grep ":$PGID:" /etc/group | cut -d: -f1)
 
 if [[ -z "$group" ]]; then
-	group='worker'
+	group='photius'
 	echo "Adding group $group($PGID)"
 	addgroup --system --gid $PGID $group
 fi
@@ -27,7 +27,7 @@ fi
 user=$(getent passwd $PUID | cut -d: -f1)
 
 if [[ -z "$user" ]]; then
-	user='worker'
+	user='photius'
 	echo "Adding user $user($PUID)"
 	adduser --system --disabled-login --gid $PGID --no-create-home --home /nonexistent --shell /bin/bash --uid $PUID $user
 fi
@@ -53,5 +53,5 @@ echo "Current timezone: $TZ"
 # Start Main Loop
 ##
 
-#exec gosu "${PUID}:${PUID}" env HOME="/opt/home" "/usr/local/bin/photius.sh"
-exec gosu $user:$group "/usr/local/bin/photius.sh"
+#exec gosu "${PUID}:${PUID}" env HOME="/opt/home" "/photius.sh"
+exec gosu $user:$group "/photius.sh"
