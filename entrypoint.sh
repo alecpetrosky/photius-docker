@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -eu
 
 ##
@@ -44,10 +43,13 @@ chown $user:$group "$TEMP_DIR"
 chown $user:$group "$DEST_DIR"
 
 ##
-# Timezone
+# Print Settings
 ##
 
 echo "Current timezone: $TZ"
+echo "PHOTIUS_SKIP_PICTURES: ${PHOTIUS_SKIP_PICTURES}"
+echo "PHOTIUS_SKIP_VIDEOS: ${PHOTIUS_SKIP_VIDEOS}"
+echo "Failure Threshold: ${PHOTIUS_FAILURE_THRESHOLD}s"
 
 ##
 # Start Main Loop

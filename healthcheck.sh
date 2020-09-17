@@ -1,3 +1,5 @@
 #!/bin/bash
+set -eu
 
-[[ $(echo "($(date +%s) - $(cat /tmp/healthcheck))" | bc -l) -lt 300 ]] && exit 0 || exit 1
+test -f /tmp/healthcheck || exit 1
+[[ $(echo "($(date +%s) - $(cat /tmp/healthcheck))" | bc -l) -lt $PHOTIUS_FAILURE_THRESHOLD ]] || exit 1

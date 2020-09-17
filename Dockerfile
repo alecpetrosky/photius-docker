@@ -10,7 +10,10 @@ VOLUME /opt/src
 VOLUME /opt/temp
 VOLUME /opt/dest
 
-ENV PUID=1000 PGID=1000 TZ=Etc/UTC
+ENV PUID=1000 PGID=1000 TZ=Etc/UTC \
+  PHOTIUS_SKIP_PICTURES=0 \
+  PHOTIUS_SKIP_VIDEOS=0 \
+  PHOTIUS_FAILURE_THRESHOLD=300
 
 COPY photius.sh /photius.sh
 COPY photius-helper.sh /photius-helper.sh
