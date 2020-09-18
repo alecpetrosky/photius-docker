@@ -10,6 +10,7 @@ TEMP_DIR=/opt/temp
 DEST_DIR=/opt/dest
 
 export SRC_DIR TEMP_DIR DEST_DIR
+export PHOTIUS_SKIP_PICTURES PHOTIUS_SKIP_VIDEOS PHOTIUS_FAILURE_THRESHOLD
 
 ##
 # Define user and group credentials used by worker processes
