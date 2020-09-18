@@ -3,6 +3,22 @@
 #export LC_ALL=C.UTF-8
 export LC_NUMERIC=C.UTF-8
 
+##
+# Print Settings
+##
+
+echo "Current timezone: $TZ"
+echo "SRC_DIR: ${SRC_DIR}"
+echo "TEMP_DIR: ${TEMP_DIR}"
+echo "DEST_DIR: ${DEST_DIR}"
+echo "PHOTIUS_SKIP_PICTURES: ${PHOTIUS_SKIP_PICTURES}"
+echo "PHOTIUS_SKIP_VIDEOS: ${PHOTIUS_SKIP_VIDEOS}"
+echo "PHOTIUS_FAILURE_THRESHOLD: ${PHOTIUS_FAILURE_THRESHOLD}s"
+
+##
+# Main Loop
+##
+
 while true
 do
   echo "[$(date)] Scanning for new files."
