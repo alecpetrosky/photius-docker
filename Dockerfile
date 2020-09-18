@@ -1,5 +1,5 @@
 FROM debian:stable-slim
-LABEL maintainer="docker@llamaq.com"
+LABEL maintainer="docker@alecpetrosky.com"
 
 RUN apt-get update \
   && apt-get install --no-install-recommends --no-install-suggests -y \

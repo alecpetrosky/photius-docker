@@ -3,9 +3,25 @@
 #export LC_ALL=C.UTF-8
 export LC_NUMERIC=C.UTF-8
 
+##
+# Print Settings
+##
+
+echo "Current timezone: $TZ"
+echo "SRC_DIR: ${SRC_DIR}"
+echo "TEMP_DIR: ${TEMP_DIR}"
+echo "DEST_DIR: ${DEST_DIR}"
+echo "PHOTIUS_SKIP_PICTURES: ${PHOTIUS_SKIP_PICTURES}"
+echo "PHOTIUS_SKIP_VIDEOS: ${PHOTIUS_SKIP_VIDEOS}"
+echo "PHOTIUS_FAILURE_THRESHOLD: ${PHOTIUS_FAILURE_THRESHOLD}s"
+
+##
+# Main Loop
+##
+
 while true
 do
-  echo "[$(date +%s.%N)] Scanning for new files."
+  echo "[$(date)] Scanning for new files."
   echo $(date +%s) > /tmp/healthcheck
 
   # We do not process hidden files or files with non-standard filename format
@@ -14,8 +30,8 @@ do
   # at least three seconds (3/60) old in our local filesystem before we process it.
 
   find "$SRC_DIR" -type f -cmin +0.05 ! -iname '.*' -iname '*.*' \
-    -exec sleep 1.5 \; -exec /usr/local/bin/photius-helper.sh "{}" \;
+    -exec sleep 1.5 \; -exec /photius-helper.sh "{}" \;
 
-  echo "[$(date +%s.%N)] Scan completed."
+  echo "[$(date)] Scan completed."
   sleep 12
 done
