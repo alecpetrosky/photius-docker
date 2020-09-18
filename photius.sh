@@ -14,7 +14,7 @@ do
   # at least three seconds (3/60) old in our local filesystem before we process it.
 
   find "$SRC_DIR" -type f -cmin +0.05 ! -iname '.*' -iname '*.*' \
-    -exec sleep 1.5 \; -exec /usr/local/bin/photius-helper.sh "{}" \;
+    -exec sleep 1.5 \; -exec /photius-helper.sh "{}" \;
 
   echo "[$(date)] Scan completed."
   sleep 12
