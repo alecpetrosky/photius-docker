@@ -22,6 +22,10 @@ src_md5=$(md5sum "$src" | awk '{print $1}')
 
 case $src_ext in
   jpg|jpeg|jpe)
+  if [[ $PHOTIUS_SKIP_PICTURES == "1" ]]; then
+    echo "Skipping $src due to PHOTIUS_SKIP_PICTURES"
+    exit 0
+  fi
   exiftran -ai "$src"
   jpegoptim -m90 "$src"
   dest="$TEMP_DIR/$src_name.jpg"
@@ -29,12 +33,20 @@ case $src_ext in
   exit_code=$?
   ;;
   png)
+  if [[ $PHOTIUS_SKIP_PICTURES == "1" ]]; then
+    echo "Skipping $src due to PHOTIUS_SKIP_PICTURES"
+    exit 0
+  fi
   optipng -fix "$src"
   dest="$TEMP_DIR/$src_name.png"
   cp "$src" "$dest"
   exit_code=$?
   ;;
   mp4|m4p|m4v|mpg|mpeg|mpe|mpv|avi|wmv|mov|qt|3gp|flv|swf|webm|avchd)
+  if [[ $PHOTIUS_SKIP_VIDEOS == "1" ]]; then
+    echo "Skipping $src due to PHOTIUS_SKIP_VIDEOS"
+    exit 0
+  fi
   hevc_flag=$(ffprobe "$src" 2>&1 >/dev/null | grep 'hevc')
   if [[ -z "$hevc_flag" ]]; then
     dest="$TEMP_DIR/$src_name.mp4"
