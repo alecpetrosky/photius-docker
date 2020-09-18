@@ -7,7 +7,8 @@ export LC_NUMERIC=C.UTF-8
 # Print Settings
 ##
 
-echo "Current timezone: $TZ"
+echo "PHOTIUS_VERSION: $PHOTIUS_VERSION"
+echo "TZ: $TZ"
 echo "SRC_DIR: ${SRC_DIR}"
 echo "TEMP_DIR: ${TEMP_DIR}"
 echo "DEST_DIR: ${DEST_DIR}"
