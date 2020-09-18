@@ -5,7 +5,7 @@ export LC_NUMERIC=C.UTF-8
 
 while true
 do
-  echo "[$(date +%s.%N)] Scanning for new files."
+  echo "[$(date)] Scanning for new files."
   echo $(date +%s) > /tmp/healthcheck
 
   # We do not process hidden files or files with non-standard filename format
@@ -16,6 +16,6 @@ do
   find "$SRC_DIR" -type f -cmin +0.05 ! -iname '.*' -iname '*.*' \
     -exec sleep 1.5 \; -exec /usr/local/bin/photius-helper.sh "{}" \;
 
-  echo "[$(date +%s.%N)] Scan completed."
+  echo "[$(date)] Scan completed."
   sleep 12
 done
