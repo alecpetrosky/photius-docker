@@ -12,13 +12,12 @@ echo "[$(date +%s.%N)] Processing $src"
 echo $(date +%s) > /tmp/healthcheck
 date1=$(date +%s%N)
 
-# We should rename file before making any changes if RENAME_WITH_FILEMODIFYDATE
-if [[ ${PHOTIUS_ENFORCE_FILEMODIFYDATE:-0} == "1" ]]; then
-  temp="%Y%m%d_%H%M%S_${tag}%%-c.%%le"
+# We should rename file before making any changes if PHOTIUS_ENFORCE_PROCESSINGDATE
+if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
+  sleep 1
+  temp="$(dirname -- "$src")/$(date +"%Y%m%d_%H%M%S")_${tag}.${src##*.}"
   echo "Renaming $src to $temp"
-  exiftool -v -d "$temp" \
-    '-FileName<FileModifyDate' \
-    "$src"
+  mv $src $temp
   exiftool -overwrite_original "-alldates<filename" "$temp"
   src="$temp"
 fi
