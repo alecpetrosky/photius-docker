@@ -28,8 +28,8 @@ case $src_ext in
   fi
   exiftran -ai "$src"
   jpegoptim -m90 "$src"
-  dest="$TEMP_DIR/$src_name.jpg"
-  cp "$src" "$dest"
+  temp="$TEMP_DIR/$src_name.jpg"
+  cp "$src" "$temp"
   exit_code=$?
   ;;
   png)
@@ -38,8 +38,8 @@ case $src_ext in
     exit 0
   fi
   optipng -fix "$src"
-  dest="$TEMP_DIR/$src_name.png"
-  cp "$src" "$dest"
+  temp="$TEMP_DIR/$src_name.png"
+  cp "$src" "$temp"
   exit_code=$?
   ;;
   mp4|m4p|m4v|mpg|mpeg|mpe|mpv|avi|wmv|mov|qt|3gp|flv|swf|webm|avchd)
@@ -49,43 +49,48 @@ case $src_ext in
   fi
   hevc_flag=$(ffprobe "$src" 2>&1 >/dev/null | grep 'hevc')
   if [[ -z "$hevc_flag" ]]; then
-    dest="$TEMP_DIR/$src_name.mp4"
+    temp="$TEMP_DIR/$src_name.mp4"
     # threads option should be the last one.
-    ffmpeg -y -i "$src" -c:v libx265 -tag:v hvc1 -threads 1 "$dest"
+    ffmpeg -y -i "$src" -c:v libx265 -tag:v hvc1 -threads 1 "$temp"
     exit_code=$?
   else
-    dest="$TEMP_DIR/$src_name.$src_ext"
-    cp "$src" "$dest"
+    temp="$TEMP_DIR/$src_name.$src_ext"
+    cp "$src" "$temp"
     exit_code=$?
   fi
   ;;
   *)
-  dest="$TEMP_DIR/$src_name.$src_ext"
-  cp "$src" "$dest"
+  temp="$TEMP_DIR/$src_name.$src_ext"
+  cp "$src" "$temp"
   exit_code=$?
   ;;
 esac
 
-echo "$src_name.$src_ext -> $dest"
+echo "$src_name.$src_ext -> $temp"
 
 if [ $exit_code -eq 0 ]; then
-  exiftool -v0 -overwrite_original -TagsFromFile "$src" -Alldates "$dest"
+  exiftool -v0 -overwrite_original -TagsFromFile "$src" -Alldates "$temp"
   rm "$src"
-  exiftool -overwrite_original -all= -tagsfromfile @ -all:all -unsafe -icc_profile --makernotes "$dest" # Sanitizing EXIF
-  exiftool -overwrite_original -imageuniqueid="$src_md5" "$dest"
-  if [[ -z $(exiftool -p '$dateTimeOriginal' -q "$dest") ]]; then
-    exiftool -overwrite_original "-alldates<filename" "$dest"
+  exiftool -overwrite_original -all= -tagsfromfile @ -all:all -unsafe -icc_profile --makernotes "$temp" # Sanitizing EXIF
+  exiftool -overwrite_original -imageuniqueid="$src_md5" "$temp"
+  if [[ -z $(exiftool -p '$dateTimeOriginal' -q "$temp") ]]; then
+    exiftool -overwrite_original "-alldates<filename" "$temp"
   fi
-  if [[ -z $(exiftool -p '$gpstimestamp' -q "$dest") || -z $(exiftool -p '$gpsdatestamp' -q "$dest") ]]; then
+  if [[ -z $(exiftool -p '$gpstimestamp' -q "$temp") || -z $(exiftool -p '$gpsdatestamp' -q "$temp") ]]; then
     tz=$(date +%:z)
-    exiftool -overwrite_original '-gpstimestamp<${datetimeoriginal}'"$tz" '-gpsdatestamp<${datetimeoriginal}'"$tz" "$dest"
+    exiftool -overwrite_original '-gpstimestamp<${datetimeoriginal}'"$tz" '-gpsdatestamp<${datetimeoriginal}'"$tz" "$temp"
   fi
-  if [[ -z "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
-    exiftool -v -d "$DEST_DIR/%Y/%m/%d/%%f%%-c.%%le" '-FileName<DateTimeOriginal' "$dest"
-  else
+  dest="$DEST_DIR/%Y/%m/%d/%%f%%-c.%%le"
+  if [[ -n "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
     # Rename Google Camera's photoboost pictures
-    exiftool -v -d "$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_Burst%%-c.%%le" '-FileName<DateTimeOriginal' "$dest"
+    dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_Burst%%-c.%%le"
   fi
+  exiftool -v -d "$dest" \
+    '-FileName<FileModifyDate' \
+    '-FileName<ModifyDate' \
+    '-FileName<CreateDate' \
+    '-FileName<DateTimeOriginal' \
+    "$temp"
   echo "success"
 else
   echo "failed ($exit_code)"
