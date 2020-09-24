@@ -6,7 +6,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 src="$1"
-tag="$(echo "$src" | xargs basename)"
+tag="$(echo "$src" | echo "$(dirname "$src")" | xargs basename)"
 
 echo "[$(date +%s.%N)] Processing $src"
 echo $(date +%s) > /tmp/healthcheck
