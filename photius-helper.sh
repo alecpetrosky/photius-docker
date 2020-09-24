@@ -6,10 +6,22 @@ if [[ $# -ne 1 ]]; then
 fi
 
 src="$1"
+tag="$(echo "$src" | xargs basename)"
 
 echo "[$(date +%s.%N)] Processing $src"
 echo $(date +%s) > /tmp/healthcheck
 date1=$(date +%s%N)
+
+# We should rename file before making any changes if RENAME_WITH_FILEMODIFYDATE
+if [[ ${PHOTIUS_ENFORCE_FILEMODIFYDATE:-0} == "1" ]]; then
+  temp="%Y%m%d_%H%M%S_${tag}%%-c.%%le"
+  echo "Renaming $src to $temp"
+  exiftool -v -d "$temp" \
+    '-FileName<FileModifyDate' \
+    "$src"
+  exiftool -overwrite_original "-alldates<filename" "$temp"
+  src="$temp"
+fi
 
 src_path=$(dirname -- "$src")
 src_file=$(basename -- "$src")

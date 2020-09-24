@@ -7,3 +7,7 @@
 ## 0.9.18 / 2020-09-18
 
 - Display PHOTIUS_VERSION on start.
+
+## 0.9.24 / 2020-09-24
+
+- Added `PHOTIUS_ENFORCE_FILEMODIFYDATE` flag.
