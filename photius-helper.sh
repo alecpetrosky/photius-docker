@@ -91,7 +91,11 @@ if [ $exit_code -eq 0 ]; then
     tz=$(date +%:z)
     exiftool -overwrite_original '-gpstimestamp<${datetimeoriginal}'"$tz" '-gpsdatestamp<${datetimeoriginal}'"$tz" "$temp"
   fi
+  # Renames Logic
   dest="$DEST_DIR/%Y/%m/%d/%%f%%-c.%%le"
+  if [[ ${PHOTIUS_RENAME_DATETIMEORIGINAL:-0} == "1" ]]; then
+    dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_$tag%%-c.%%le"
+  fi
   if [[ -n "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
     # Rename Google Camera's photoboost pictures
     dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_Burst%%-c.%%le"
