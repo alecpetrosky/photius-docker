@@ -1,6 +1,6 @@
 # Photius Docker
 
-Photius Docker is unpretentious workhorse that maintains fitness of your personal photo and video home archive.
+Photius Docker is open source unpretentious workhorse that maintains fitness of your personal photo and video home archive.
 
 ## What it does?
 
@@ -78,6 +78,12 @@ docker run -it --restart unless-stopped \
     -e PHOTIUS_FAILURE_THRESHOLD=3600 \
     -e PHOTIUS_SKIP_PICTURES=1 \
     llamaq/photius
+
+## Contribute
+
+Source: https://github.com/alecpetrosky/photius-docker
+
+Bug reports: https://github.com/alecpetrosky/photius-docker/issues
 
 ## License
 
