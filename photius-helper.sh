@@ -6,7 +6,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 src="$1"
-tag="$(echo "$src" | echo "$(dirname "$src")" | xargs basename)"
+tag="$(echo "$src" | echo "$(dirname "$src")" | xargs -d '\n' basename | cut -d ' ' -f1)"
 
 echo "[$(date +%s.%N)] Processing $src"
 echo $(date +%s) > /tmp/healthcheck
@@ -17,7 +17,7 @@ if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
   sleep 1
   temp="$(dirname -- "$src")/$(date +"%Y%m%d_%H%M%S")_${tag}.${src##*.}"
   echo "Renaming $src to $temp"
-  mv $src $temp
+  mv "$src" "$temp"
   exiftool -overwrite_original "-alldates<filename" "$temp"
   src="$temp"
 fi
