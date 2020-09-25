@@ -32,9 +32,11 @@ do
   # For the same reason, just to be sure, we want to be sure each file to be
   # at least three seconds (3/60) old in our local filesystem before we process it.
 
-  find "$SRC_DIR" -type f -cmin +0.05 ! -iname '.*' -iname '*.*' \
-    -exec sleep 1.5 \; -exec /photius-helper.sh "{}" \;
-
+  find "$SRC_DIR" -type d ! -iname '.*' | while read DIR; do
+    find "$DIR" -type f -maxdepth 1 -cmin +0.05 ! -iname '.*' -iname '*.*' \
+      -exec sleep 1.5 \; -exec /photius-helper.sh "{}" \;
+  done
+  
   echo "[$(date)] Scan completed."
   sleep 12
 done
