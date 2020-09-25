@@ -12,16 +12,6 @@ echo "[$(date +%s.%N)] Processing $src"
 echo $(date +%s) > /tmp/healthcheck
 date1=$(date +%s%N)
 
-# We should rename file before making any changes if PHOTIUS_ENFORCE_PROCESSINGDATE
-if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
-  sleep 1
-  temp="$(dirname -- "$src")/$(date +"%Y%m%d_%H%M%S")_${tag}.${src##*.}"
-  echo "Renaming $src to $temp"
-  mv "$src" "$temp"
-  exiftool -overwrite_original "-alldates<filename" "$temp"
-  src="$temp"
-fi
-
 src_path=$(dirname -- "$src")
 src_file=$(basename -- "$src")
 src_name="${src_file%.*}"
@@ -84,6 +74,9 @@ if [ $exit_code -eq 0 ]; then
   rm "$src"
   exiftool -overwrite_original -all= -tagsfromfile @ -all:all -unsafe -icc_profile --makernotes "$temp" # Sanitizing EXIF
   exiftool -overwrite_original -imageuniqueid="$src_md5" "$temp"
+  if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
+    exiftool -overwrite_original "-alldates<now" "$temp"
+  fi
   if [[ -z $(exiftool -p '$dateTimeOriginal' -q "$temp") ]]; then
     exiftool -overwrite_original "-alldates<filename" "$temp"
   fi
@@ -91,9 +84,11 @@ if [ $exit_code -eq 0 ]; then
     tz=$(date +%:z)
     exiftool -overwrite_original '-gpstimestamp<${datetimeoriginal}'"$tz" '-gpsdatestamp<${datetimeoriginal}'"$tz" "$temp"
   fi
-  # Renames Logic
   dest="$DEST_DIR/%Y/%m/%d/%%f%%-c.%%le"
   if [[ ${PHOTIUS_RENAME_DATETIMEORIGINAL:-0} == "1" ]]; then
+    dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_$tag%%-c.%%le"
+  fi
+  if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
     dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_$tag%%-c.%%le"
   fi
   if [[ -n "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
@@ -106,6 +101,7 @@ if [ $exit_code -eq 0 ]; then
     '-FileName<CreateDate' \
     '-FileName<DateTimeOriginal' \
     "$temp"
+    
   echo "success"
 else
   echo "failed ($exit_code)"
