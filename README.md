@@ -41,6 +41,7 @@ When using volumes (-v flags) permissions issues can arise between the host OS a
 - `PHOTIUS_SKIP_PICTURES` exclude pictures from scanning and processing (default 0).
 - `PHOTIUS_SKIP_VIDEOS` exclude videos from scanning and processing (default 0).
 - `PHOTIUS_FAILURE_THRESHOLD` interval in seconds for the container to be considered unhealthy (default 300).
+- `PHOTIUS_ALLDATES_FROM_PROCESSINGDATE` replace all exif dates with file processing datetime (default 0).
 - `PHOTIUS_RENAME_PROCESSINGDATE` apply file processing datetime for all exif dates and use it as new filename with the following format `%Y%m%d_%H%M%S_FOLDERNAME` (default 0).
 - `PHOTIUS_RENAME_DATETIMEORIGINAL` use exif datetime (DateTimeOriginal > CreateDate > ModifyDate > FileModifyDate, the first one found is applied) as new filename with the following format `%Y%m%d_%H%M%S_FOLDERNAME` (default 0).
 

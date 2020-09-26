@@ -74,6 +74,9 @@ if [ $exit_code -eq 0 ]; then
   rm "$src"
   exiftool -overwrite_original -all= -tagsfromfile @ -all:all -unsafe -icc_profile --makernotes "$temp" # Sanitizing EXIF
   exiftool -overwrite_original -imageuniqueid="$src_md5" "$temp"
+  if [[ ${PHOTIUS_ALLDATES_FROM_PROCESSINGDATE:-0} == "1" ]]; then
+    exiftool -overwrite_original "-alldates<now" "$temp"
+  fi
   if [[ ${PHOTIUS_RENAME_PROCESSINGDATE:-0} == "1" ]]; then
     exiftool -overwrite_original "-alldates<now" "$temp"
   fi

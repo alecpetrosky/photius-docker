@@ -15,6 +15,7 @@ echo "DEST_DIR: ${DEST_DIR}"
 echo "PHOTIUS_SKIP_PICTURES: ${PHOTIUS_SKIP_PICTURES}"
 echo "PHOTIUS_SKIP_VIDEOS: ${PHOTIUS_SKIP_VIDEOS}"
 echo "PHOTIUS_FAILURE_THRESHOLD: ${PHOTIUS_FAILURE_THRESHOLD}s"
+echo "PHOTIUS_ALLDATES_FROM_PROCESSINGDATE: ${PHOTIUS_ALLDATES_FROM_PROCESSINGDATE}"
 echo "PHOTIUS_RENAME_PROCESSINGDATE: ${PHOTIUS_RENAME_PROCESSINGDATE}"
 echo "PHOTIUS_RENAME_DATETIMEORIGINAL: ${PHOTIUS_RENAME_DATETIMEORIGINAL}"
 
@@ -35,9 +36,9 @@ do
   find "$SRC_DIR" -type f -cmin +0.05 ! -iname '.*' -iname '*.*' -printf "%T@ %p\n" | sort -n | cut -d' ' -f2- | while read FILE; do
     REL_PATH="${FILE#"$SRC_DIR"}"
     if echo "$REL_PATH" | grep -vq '\/\.'; then
-      sleep 1.5
-      # echo "$FILE"
-      /photius-helper.sh "$FILE"
+      #sleep 1.5
+      echo "$FILE"
+      #/photius-helper.sh "$FILE"
     fi
   done
 
