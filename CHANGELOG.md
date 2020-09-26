@@ -7,13 +7,13 @@
 ## 0.9.25 / 2020-09-25
 
 - Added: exclude hidden directories ([#3](https://github.com/alecpetrosky/photius-docker/issues/3)).
-- Fixed: race condition with active `PHOTIUS_ENFORCE_PROCESSINGDATE` flag ([#4](https://github.com/alecpetrosky/photius-docker/issues/4)).
+- Fixed: race condition with active `PHOTIUS_RENAME_PROCESSINGDATE` flag ([#4](https://github.com/alecpetrosky/photius-docker/issues/4)).
 - Fixed: specify global options before other arguments ([#5](https://github.com/alecpetrosky/photius-docker/issues/5)).
 - Added: sort main queue before processing ([#6](https://github.com/alecpetrosky/photius-docker/issues/6)).
 
 ## 0.9.24 / 2020-09-24
 
-- Added `PHOTIUS_ENFORCE_PROCESSINGDATE` and `PHOTIUS_RENAME_DATETIMEORIGINAL` flags.
+- Added `PHOTIUS_RENAME_PROCESSINGDATE` and `PHOTIUS_RENAME_DATETIMEORIGINAL` flags.
 
 ## 0.9.18 / 2020-09-18
 

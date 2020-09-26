@@ -74,7 +74,7 @@ if [ $exit_code -eq 0 ]; then
   rm "$src"
   exiftool -overwrite_original -all= -tagsfromfile @ -all:all -unsafe -icc_profile --makernotes "$temp" # Sanitizing EXIF
   exiftool -overwrite_original -imageuniqueid="$src_md5" "$temp"
-  if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
+  if [[ ${PHOTIUS_RENAME_PROCESSINGDATE:-0} == "1" ]]; then
     exiftool -overwrite_original "-alldates<now" "$temp"
   fi
   if [[ -z $(exiftool -p '$dateTimeOriginal' -q "$temp") ]]; then
@@ -88,7 +88,7 @@ if [ $exit_code -eq 0 ]; then
   if [[ ${PHOTIUS_RENAME_DATETIMEORIGINAL:-0} == "1" ]]; then
     dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_"$tag"%%-c.%%le"
   fi
-  if [[ ${PHOTIUS_ENFORCE_PROCESSINGDATE:-0} == "1" ]]; then
+  if [[ ${PHOTIUS_RENAME_PROCESSINGDATE:-0} == "1" ]]; then
     dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_"$tag"%%-c.%%le"
   fi
   if [[ -n "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
