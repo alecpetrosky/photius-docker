@@ -36,9 +36,9 @@ do
   find "$SRC_DIR" -type f -cmin +0.05 ! -iname '.*' -iname '*.*' -printf "%T@ %p\n" | sort -n | cut -d' ' -f2- | while read FILE; do
     REL_PATH="${FILE#"$SRC_DIR"}"
     if echo "$REL_PATH" | grep -vq '\/\.'; then
-      #sleep 1.5
-      echo "$FILE"
-      #/photius-helper.sh "$FILE"
+      # echo "$FILE"
+      sleep 1.5
+      /photius-helper.sh "$FILE"
     fi
   done
 
