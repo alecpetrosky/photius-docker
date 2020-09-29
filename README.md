@@ -23,20 +23,18 @@ Here're list of actions that Photius currently performs on media files:
 ```
 docker run -it --restart unless-stopped \
     --name photius \
-    -v /opt/webdav:/opt/src \
-    -v /opt/temp:/opt/temp \
-    -v /opt/fail:/opt/fail \
-    -v /opt/photos:/opt/dest \
+    -v /srv/webdav:/opt \
     llamaq/photius
 
 ```
 
 ## Parameters & variables
 
-- **/opt/src:** incoming directory
-- **/opt/temp:** temporary directory
-- **/opt/fail:** directory where files with processing errors will be placed.
-- **/opt/dest:** final destination
+- **/opt:** base directory
+- /opt/src: incoming directory (if needed outside of base directory)
+- /opt/temp: temporary directory (if needed outside of base directory)
+- /opt/fail: directory where files with processing errors will be placed (if needed outside of base directory)
+- /opt/dest: final destination (if needed outside of base directory)
 
 When using volumes (-v flags) permissions issues can arise between the host OS and the container. You can avoid this issue by specifying the user `PUID` and group `PGID` value. For example, `-e PUID=1000 -e PGID=1000`. Default values for `PUID` and `PGID` are `1000`, if no environment variables are provided.
 
@@ -50,7 +48,7 @@ When using volumes (-v flags) permissions issues can arise between the host OS a
 ## Real World Usage Example
 
 - Home / Cloud server
-  - Point `/opt/src` to *webdav/ftp/samba/...* directory where you upload your photos. Also you may use our [llamaq/nginx-extras](https://hub.docker.com/r/llamaq/nginx-extras) docker container as the base for your webdav server.
+  - Point `/opt` to any directory within *webdav/ftp/samba/...* server. Upload/copy your media into `src` directory. You may use our [llamaq/nginx-extras](https://hub.docker.com/r/llamaq/nginx-extras) docker container as the base for your webdav server.
   - If you want to upload your photo & video collection at multiple locations (home server, cloud server, laptop) and have all them in sync, you can give a try to an outstanding opensource solution [Syncthing](https://syncthing.net/). In this manner, when at home you upload your photos to home server, on vacation upload them to your laptop and being on the move, use your cloud server. It doesn't matter where you're, your media will be in sync. Just install `photius`, `nginx-extras` and `syncthing` containers at each server location.
 - Android or iOS device
   - If you're looking for a wireless transfer solution for photo & video backups between iOS and Android devices, computer (PC & Mac), cloud / photo services and NAS devices, you can give a try to [PhotoSync](https://www.photosync-app.com). When using PhotoSync to upload your media with WebDAV, we recommend `Date Taken` as Format for filenames as WebDAV doesn't allow preserve dates and this setting will allow you to preserve creation dates for media that do not have EXIF metadata (i.e. photos downloaded from Facebook or WhatsApp) or does not support it (i.e. GIF format). If you'd like to preserve parent directory name (which is often corresponds to app name) then check FolderSync's `Create Subdirectories` with format `Folder Name` and enable `PHOTIUS_RENAME_DATETIMEORIGINAL` for you container. You can get the same effect setting `Date Taken + Folder Name` (YR%mR%dR_%HR%MR%SR_%FP) as Custom Format for uploaded files in FolderSync. In this case, you don't have to enable `PHOTIUS_RENAME_DATETIMEORIGINAL` for your container.
@@ -66,20 +64,14 @@ processing usually takes much longer than image processing).
 
 docker run -it --restart unless-stopped \
     --name photius_pictures \
-    -v /opt/webdav:/opt/src \
-    -v /opt/temp:/opt/temp \
-    -v /opt/fail:/opt/fail \
-    -v /opt/photos:/opt/dest \
+    -v /srv/webdav:/opt \
     -e PHOTIUS_FAILURE_THRESHOLD=300 \
     -e PHOTIUS_SKIP_VIDEOS=1 \
     llamaq/photius
 
 docker run -it --restart unless-stopped \
     --name photius_videos \
-    -v /opt/webdav:/opt/src \
-    -v /opt/temp:/opt/temp \
-    -v /opt/fail:/opt/fail \
-    -v /opt/photos:/opt/dest \
+    -v /srv/webdav:/opt \
     -e PHOTIUS_FAILURE_THRESHOLD=3600 \
     -e PHOTIUS_SKIP_PICTURES=1 \
     llamaq/photius

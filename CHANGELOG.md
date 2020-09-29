@@ -3,6 +3,7 @@
 ## 0.9.29 / 2020-09-29
 
 - Added: Move files into a special directory if processing errors. ([#9](https://github.com/alecpetrosky/photius-docker/issues/9)).
+- Added: Expose "base" directory (/opt) as external volume. ([#10](https://github.com/alecpetrosky/photius-docker/issues/10)).
 
 ## 0.9.26 / 2020-09-26
 

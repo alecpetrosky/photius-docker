@@ -6,6 +6,7 @@ RUN apt-get update \
     gosu bc libimage-exiftool-perl ffmpeg imagemagick jpegoptim optipng exiftran \
   && apt-get -y clean && apt-get purge -y --auto-remove && rm -rf /var/lib/apt/lists/*
 
+VOLUME /opt
 VOLUME /opt/src
 VOLUME /opt/temp
 VOLUME /opt/fail
