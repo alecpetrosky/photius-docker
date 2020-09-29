@@ -25,6 +25,7 @@ docker run -it --restart unless-stopped \
     --name photius \
     -v /opt/webdav:/opt/src \
     -v /opt/temp:/opt/temp \
+    -v /opt/fail:/opt/fail \
     -v /opt/photos:/opt/dest \
     llamaq/photius
 
@@ -34,6 +35,7 @@ docker run -it --restart unless-stopped \
 
 - **/opt/src:** incoming directory
 - **/opt/temp:** temporary directory
+- **/opt/fail:** directory where files with processing errors will be placed.
 - **/opt/dest:** final destination
 
 When using volumes (-v flags) permissions issues can arise between the host OS and the container. You can avoid this issue by specifying the user `PUID` and group `PGID` value. For example, `-e PUID=1000 -e PGID=1000`. Default values for `PUID` and `PGID` are `1000`, if no environment variables are provided.
@@ -66,6 +68,7 @@ docker run -it --restart unless-stopped \
     --name photius_pictures \
     -v /opt/webdav:/opt/src \
     -v /opt/temp:/opt/temp \
+    -v /opt/fail:/opt/fail \
     -v /opt/photos:/opt/dest \
     -e PHOTIUS_FAILURE_THRESHOLD=300 \
     -e PHOTIUS_SKIP_VIDEOS=1 \
@@ -75,6 +78,7 @@ docker run -it --restart unless-stopped \
     --name photius_videos \
     -v /opt/webdav:/opt/src \
     -v /opt/temp:/opt/temp \
+    -v /opt/fail:/opt/fail \
     -v /opt/photos:/opt/dest \
     -e PHOTIUS_FAILURE_THRESHOLD=3600 \
     -e PHOTIUS_SKIP_PICTURES=1 \

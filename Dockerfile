@@ -8,6 +8,7 @@ RUN apt-get update \
 
 VOLUME /opt/src
 VOLUME /opt/temp
+VOLUME /opt/fail
 VOLUME /opt/dest
 
 ARG BUILD_VERSION

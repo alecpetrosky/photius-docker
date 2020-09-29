@@ -7,9 +7,10 @@ set -eu
 
 SRC_DIR=/opt/src
 TEMP_DIR=/opt/temp
+FAIL_DIR=/opt/fail
 DEST_DIR=/opt/dest
 
-export SRC_DIR TEMP_DIR DEST_DIR
+export SRC_DIR TEMP_DIR FAIL_DIR DEST_DIR
 
 ##
 # Define user and group credentials used by worker processes
@@ -40,6 +41,7 @@ echo "Credentials used by worker processes: user $user($PUID), group $group($PGI
 test -f /tmp/healthcheck && rm /tmp/healthcheck
 chown $user:$group "$SRC_DIR"
 chown $user:$group "$TEMP_DIR"
+chown $user:$group "$FAIL_DIR"
 chown $user:$group "$DEST_DIR"
 
 ##
