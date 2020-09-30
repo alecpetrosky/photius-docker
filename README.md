@@ -30,7 +30,7 @@ docker run -it --restart unless-stopped \
 
 ## Parameters & variables
 
-- **/opt:** base directory
+- **/opt:** Volume "base" directory
 - /opt/src: incoming directory (if needed outside of base directory)
 - /opt/temp: temporary directory (if needed outside of base directory)
 - /opt/fail: directory where files with processing errors will be placed (if needed outside of base directory)

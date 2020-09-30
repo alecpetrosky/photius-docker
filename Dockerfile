@@ -7,10 +7,6 @@ RUN apt-get update \
   && apt-get -y clean && apt-get purge -y --auto-remove && rm -rf /var/lib/apt/lists/*
 
 VOLUME /opt
-VOLUME /opt/src
-VOLUME /opt/temp
-VOLUME /opt/fail
-VOLUME /opt/dest
 
 ARG BUILD_VERSION
 ENV PHOTIUS_VERSION=${BUILD_VERSION:-UNKNOWN_RELEASE}

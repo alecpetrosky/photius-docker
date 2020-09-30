@@ -38,7 +38,11 @@ echo "Credentials used by worker processes: user $user($PUID), group $group($PGI
 # Setting Up Directories
 ##
 
-test -f /tmp/healthcheck && rm /tmp/healthcheck
+test -d "$SRC_DIR"  || mkdir "$SRC_DIR"
+test -d "$TEMP_DIR" || mkdir "$TEMP_DIR"
+test -d "$FAIL_DIR" || mkdir "$FAIL_DIR"
+test -d "$DEST_DIR" || mkdir "$DEST_DIR"
+
 chown $user:$group "$SRC_DIR"
 chown $user:$group "$TEMP_DIR"
 chown $user:$group "$FAIL_DIR"
@@ -49,4 +53,5 @@ chown $user:$group "$DEST_DIR"
 ##
 
 #exec gosu "${PUID}:${PUID}" env HOME="/opt/home" "/photius.sh"
+test -f /tmp/healthcheck && rm /tmp/healthcheck
 exec gosu $user:$group "/photius.sh"
