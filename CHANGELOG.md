@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.9.29b / 2020-09-29
+
+- Optimization & refactoring.
+
 ## 0.9.29 / 2020-09-29
 
 - Added: Move files into a special directory if processing errors. ([#9](https://github.com/alecpetrosky/photius-docker/issues/9)).
