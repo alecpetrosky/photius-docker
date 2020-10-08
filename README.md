@@ -84,7 +84,7 @@ Bug reports: https://github.com/alecpetrosky/photius-docker/issues
 
 ## License
 
-Please note that the software is in early alpha stage. Please do regular backups of your data.
+Please note that the software is in early beta stage. Please do regular backups of your data.
 
 This container and its code is licensed under the MIT License and provided "AS IS", without warranty of any kind.
 
