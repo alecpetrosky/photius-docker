@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.10.20 / 2020-10-20
+
+- Enhancement: Dynamic pause between queued files ([#11](https://github.com/alecpetrosky/photius-docker/issues/11)).
+
 ## 0.9.29b / 2020-09-29
 
 - Optimization & refactoring.

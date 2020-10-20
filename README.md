@@ -18,6 +18,8 @@ Here're list of actions that Photius currently performs on media files:
 - Making filename of photoboost photo (which were taken with Google Camera) look better.
 - Setting original file's md5sum as “Image Unique ID” EXIF field that could be used in photo management software.
 
+Photius tries to be very delicate with your hardware and not to overload your system resources. Therefore you can use your computer normally while Photius performs its operations.
+
 Please note that the software is in early beta stage. Please do regular backups of your data.
 
 ## Usage

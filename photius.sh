@@ -38,8 +38,12 @@ do
     REL_PATH="${FILE#"$SRC_DIR"}"
     if echo "$REL_PATH" | grep -vq '\/\.'; then
       # echo "$FILE"
-      sleep 1.5
+      ts=$(date +%s%N)
+      sleep .005
       /photius-helper.sh "$FILE"
+      tt=$(echo "scale=3; $(($(date +%s%N) - $ts))/1000000000" | bc)
+      echo "Time taken: $tt milliseconds"
+      sleep $tt
     fi
   done
 
