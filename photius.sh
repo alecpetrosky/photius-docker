@@ -13,6 +13,7 @@ echo "SRC_DIR: ${SRC_DIR}"
 echo "TEMP_DIR: ${TEMP_DIR}"
 echo "FAIL_DIR: ${FAIL_DIR}"
 echo "DEST_DIR: ${DEST_DIR}"
+echo "PHOTIUS_SLEEP_INTERVAL: ${PHOTIUS_SLEEP_INTERVAL}"
 echo "PHOTIUS_SKIP_PICTURES: ${PHOTIUS_SKIP_PICTURES}"
 echo "PHOTIUS_SKIP_VIDEOS: ${PHOTIUS_SKIP_VIDEOS}"
 echo "PHOTIUS_FAILURE_THRESHOLD: ${PHOTIUS_FAILURE_THRESHOLD}s"
@@ -43,7 +44,10 @@ do
       sleep .005
       /photius-helper.sh "$FILE"
       tt=$(echo "scale=3; $(($(date +%s%N) - $ts))/1000000000" | bc)
-      echo "Time taken: $tt milliseconds"
+      echo "Time taken: ${tt}s"
+      if [[ $PHOTIUS_SLEEP_INTERVAL -gt 0 ]]; then
+        tt=$PHOTIUS_SLEEP_INTERVAL
+      fi
       sleep $tt
     fi
   done

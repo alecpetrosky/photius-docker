@@ -49,6 +49,7 @@ When using volumes (-v flags) permissions issues can arise between the host OS a
 - `PHOTIUS_RENAME_PROCESSINGDATE` apply file processing datetime for all exif dates and use it as new filename with the following format `%Y%m%d_%H%M%S_FOLDERNAME` (default `0`).
 - `PHOTIUS_RENAME_DATETIMEORIGINAL` use exif datetime (DateTimeOriginal > CreateDate > ModifyDate > FileModifyDate, the first one found is applied) as new filename with the following format `%Y%m%d_%H%M%S_FOLDERNAME` (default `0`).
 - `PHOTIUS_SF_DATETIMEORIGINAL` smart folder name inside `src` (can be any valid folder name ). If set, files placed inside this smart folder will use exif datetime (DateTimeOriginal > CreateDate > ModifyDate > FileModifyDate, the first one found is applied) as new filename with the following format `%Y%m%d_%H%M%S_FOLDERNAME` regardless of the global `PHOTIUS_RENAME_DATETIMEORIGINAL` (default ``).
+- `PHOTIUS_SLEEP_INTERVAL` idle time in seconds between processing each file, i.e. `0.5` for `500` ms. If `0`, idle time will be equal to last processing time (default `0`).
 
 ## Real World Usage Example
 

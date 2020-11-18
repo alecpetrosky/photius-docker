@@ -2,6 +2,7 @@
 
 ## 0.11.18 / 2020-11-18
 
+- Enhancement: `PHOTIUS_SLEEP_INTERVAL` flag added. See `README`.
 - Enhancement: `PHOTIUS_SF_DATETIMEORIGINAL` flag added. See `README`.
 
 ## 0.10.20 / 2020-10-20
