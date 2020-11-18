@@ -48,6 +48,12 @@ chown $user:$group "$TEMP_DIR"
 chown $user:$group "$FAIL_DIR"
 chown $user:$group "$DEST_DIR"
 
+if [[ -n ${PHOTIUS_SF_DATETIMEORIGINAL:-''} ]]; then
+	DTO_DIR="${SRC_DIR}/${PHOTIUS_SF_DATETIMEORIGINAL}"
+	test -d "$DTO_DIR"  || mkdir "$DTO_DIR"
+	chown $user:$group "$DTO_DIR"
+fi
+
 ##
 # Start Main Loop
 ##

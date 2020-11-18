@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.11.18 / 2020-11-18
+
+- Enhancement: `PHOTIUS_SF_DATETIMEORIGINAL` flag added. See `README`.
+
 ## 0.10.20 / 2020-10-20
 
 - Enhancement: Dynamic pause between queued files ([#11](https://github.com/alecpetrosky/photius-docker/issues/11)).

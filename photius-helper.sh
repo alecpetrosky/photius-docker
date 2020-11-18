@@ -100,6 +100,11 @@ fi
 if [[ ${PHOTIUS_RENAME_PROCESSINGDATE:-0} == "1" ]]; then
   dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_"$tag"%%-c.%%le"
 fi
+if [[ -n ${PHOTIUS_SF_DATETIMEORIGINAL:-''} ]]; then
+  if [[ $src == *"${SRC_DIR}/${PHOTIUS_SF_DATETIMEORIGINAL}"* ]]; then
+    dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_"$tag"%%-c.%%le"
+  fi
+fi
 if [[ -n "$(echo "$src_name" | grep -E '.*[0-9]{8}_[0-9]{6}_IMG_.*')" ]]; then
   # Rename Google Camera's photoboost pictures
   dest="$DEST_DIR/%Y/%m/%d/%Y%m%d_%H%M%S_Burst%%-c.%%le"
