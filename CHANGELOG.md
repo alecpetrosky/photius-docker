@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.05.21 / 2021-05-21
+
+- Base image software updated.
+
 ## 0.11.18 / 2020-11-18
 
 - Enhancement: `PHOTIUS_SLEEP_INTERVAL` flag added. See `README`.
