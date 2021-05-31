@@ -84,9 +84,11 @@ docker run -it --restart unless-stopped \
 
 ## Contribute
 
-Source: https://github.com/alecpetrosky/photius-docker
+Source: https://github.com/llamaqcom/photius-docker
 
-Bug reports: https://github.com/alecpetrosky/photius-docker/issues
+Bug reports: https://github.com/llamaqcom/photius-docker/issues
+
+Docker image: https://hub.docker.com/r/llamaq/photius
 
 ## License
 
