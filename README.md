@@ -1,5 +1,7 @@
 # Photius
 
+[![Docker Hub](https://img.shields.io/docker/pulls/llamaq/photius)][Docker Hub]
+
 Photius is unpretentious open-source "workhorse" that maintains fitness of your personal photo and video home archive.
 
 ## What it does?
