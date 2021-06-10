@@ -1,8 +1,10 @@
 # Photius
 
 [![Docker Hub](https://img.shields.io/docker/pulls/llamaq/photius)][Docker Hub]
+[![License](https://img.shields.io/github/license/llamaqcom/photius-docker.svg)][License]
 
 [Docker Hub]:      https://hub.docker.com/r/llamaq/photius
+[License]:         https://github.com/llamaqcom/photius-docker/blob/master/LICENSE
 
 Photius is unpretentious open-source "workhorse" that maintains fitness of your personal photo and video home archive.
 
