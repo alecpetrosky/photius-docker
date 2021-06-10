@@ -1,6 +1,6 @@
-# Photius Docker
+# Photius
 
-Photius Docker is open source unpretentious workhorse that maintains fitness of your personal photo and video home archive.
+Photius is unpretentious open-source "workhorse" that maintains fitness of your personal photo and video home archive.
 
 ## What it does?
 
