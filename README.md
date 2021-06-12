@@ -6,7 +6,7 @@
 [Docker Hub]:      https://hub.docker.com/r/llamaq/photius
 [License]:         https://github.com/llamaqcom/photius-docker/blob/master/LICENSE
 
-Photius is unpretentious open-source "workhorse" that maintains fitness of your personal photo and video home archive.
+Photius is unpretentious open-source multi-arch "workhorse" that maintains fitness of your personal home photo and video archive.
 
 ## What it does?
 
